@@ -5,8 +5,8 @@ public abstract class Couche {
     private Couche coucheInf;
 
     protected abstract void recevoirDeSup(byte[] PDU);
-    protected abstract void recevoirDeInf(byte[] PDU);
-    protected void envoieVersSup(byte[] PDU){
+    protected abstract void recevoirDeInf(byte[] PDU) throws ErreurDeTransmission;
+    protected void envoieVersSup(byte[] PDU) throws ErreurDeTransmission{
         coucheSup.recevoirDeInf(PDU);
     }
     protected void envoieVersInf(byte[] PDU){
