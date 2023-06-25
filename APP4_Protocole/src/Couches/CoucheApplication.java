@@ -21,8 +21,8 @@ public class CoucheApplication extends Couche {
      * S'il n'y a pas de couche au dessus, le programme principale appel la methode @EnvoieFichier.
      */
     @Override
-    protected void recevoirDeSup(byte[] PDU) {
-        // NOTHING NOw
+    protected void recevoirDeCoucheSup(byte[] PDU) {
+        // Aucune couche superieur
     }
 
     /**
@@ -32,7 +32,7 @@ public class CoucheApplication extends Couche {
      *              and the data from the file on the other bytes.
      */
     @Override
-    protected void recevoirDeInf(byte[] PDU) {
+    protected void recevoirDeCoucheInf(byte[] PDU) {
         System.out.println("Receiving");
         String title = new String(Arrays.copyOfRange(PDU, 0, 188), StandardCharsets.US_ASCII).trim();
         byte[] data_bytes = Arrays.copyOfRange(PDU, 188, PDU.length);
@@ -70,7 +70,7 @@ public class CoucheApplication extends Couche {
         APDU = new byte[188 + bytesFichier.length];
         arraycopy(nomFichier, 0, APDU, 0, nomFichier.length);
         arraycopy(bytesFichier, 0, APDU, 188, bytesFichier.length);
-        envoieVersInf(APDU);
+        envoieVersCoucheInf(APDU);
         Thread.sleep(1000);
         System.exit(0);
     }

@@ -31,7 +31,7 @@ public class CoucheLiaisonDeDonnees extends Couche {
      * @param PDU   Packet from the Physical Layer
      */
     @Override
-    protected void ReceiveFromDown(byte[] PDU) throws ErreurDeTransmission {
+    protected void recevoirDeCoucheInf(byte[] PDU) throws ErreurDeTransmission {
         // Extract data from PDU
         byte[] paquet = new byte[PDU.length - 4];
         arraycopy(PDU, 4, paquet, 0, paquet.length);
@@ -50,7 +50,7 @@ public class CoucheLiaisonDeDonnees extends Couche {
 
         // Send PDU to network layer
         paquetsRecus++;
-        envoieVersSup(paquet);
+        envoieVersCoucheSup(paquet);
     }
 
     /**
@@ -59,7 +59,7 @@ public class CoucheLiaisonDeDonnees extends Couche {
      * @param PDU
      */
     @Override
-    protected void recevoirDeSup(byte[] PDU) {
+    protected void recevoirDeCoucheSup(byte[] PDU) {
         // Allocate new PDU
         byte[] trame = new byte[PDU.length + 4];
 
@@ -79,6 +79,6 @@ public class CoucheLiaisonDeDonnees extends Couche {
 
         // Send PDU to physical layer
         paquetsTransmis++;
-        envoieVersInf(trame);
+        envoieVersCoucheInf(trame);
     }
 }

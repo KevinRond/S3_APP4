@@ -4,13 +4,13 @@ public abstract class Couche {
     private Couche coucheSup;
     private Couche coucheInf;
 
-    protected abstract void recevoirDeSup(byte[] PDU);
-    protected abstract void recevoirDeInf(byte[] PDU) throws ErreurDeTransmission;
-    protected void envoieVersSup(byte[] PDU) throws ErreurDeTransmission{
-        coucheSup.recevoirDeInf(PDU);
+    protected abstract void recevoirDeCoucheSup(byte[] PDU);
+    protected abstract void recevoirDeCoucheInf(byte[] PDU) throws ErreurDeTransmission;
+    protected void envoieVersCoucheSup(byte[] PDU) throws ErreurDeTransmission{
+        coucheSup.recevoirDeCoucheInf(PDU);
     }
-    protected void envoieVersInf(byte[] PDU){
-        coucheInf.recevoirDeSup(PDU);
+    protected void envoieVersCoucheInf(byte[] PDU){
+        coucheInf.recevoirDeCoucheSup(PDU);
     }
     public void setCoucheSup(Couche coucheSup){
         this.coucheSup = coucheSup;

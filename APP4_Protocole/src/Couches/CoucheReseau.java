@@ -7,12 +7,12 @@ public class CoucheReseau extends Couche {
     }
 
     @Override
-    protected void recevoirDeSup(byte[] PDU) {
-        envoieVersInf(PDU);
+    protected void recevoirDeCoucheSup(byte[] PDU) {
+        envoieVersCoucheInf(PDU);
     }
 
     @Override
-    protected void recevoirDeInf(byte[] PDU) throws ErreurDeTransmission {
-        envoieVersSup(PDU);
+    protected void recevoirDeCoucheInf(byte[] PDU) throws ErreurDeTransmission {
+        envoieVersCoucheSup(PDU);
     }
 }
