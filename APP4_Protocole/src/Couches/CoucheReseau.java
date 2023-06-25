@@ -1,13 +1,18 @@
 package Couches;
 
 public class CoucheReseau extends Couche {
-    @Override
-    protected void recevoirDeSup(byte[] PDU) {
-
+    private static CoucheReseau instance;
+    public static CoucheReseau getInstance(){
+        return instance == null ? instance = new CoucheReseau() : instance;
     }
 
     @Override
-    protected void recevoirDeInf(byte[] PDU) {
+    protected void recevoirDeSup(byte[] PDU) {
+        envoieVersInf(PDU);
+    }
 
+    @Override
+    protected void recevoirDeInf(byte[] PDU) throws ErreurDeTransmission {
+        envoieVersSup(PDU);
     }
 }
