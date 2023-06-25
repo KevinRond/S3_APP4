@@ -1,11 +1,13 @@
 package Server;
-import Threads.ServerThread;
 
-import java.io.*;
+import java.io.IOException;
 
 public class Server {
     public static void main(String[] args) throws IOException {
-        new ServerThread().start();
+        String port = args[0];
+        InstanceServer instance = new InstanceServer(port);
+        instance.DemarrageServer();
+        System.out.println("Terminer");
         //System.out.println("Current Working Directory: " + System.getProperty("user.dir"));
 
     }
