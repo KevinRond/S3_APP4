@@ -37,7 +37,7 @@ public class CouchePhysique extends Couche {
         return thread.running;
     }
     @Override
-    protected void recevoirDeSup(byte[] PDU) {
+    protected void recevoirDeCoucheSup(byte[] PDU) {
         DatagramSocket socket = null;
         try {
             socket = new DatagramSocket();
@@ -58,8 +58,8 @@ public class CouchePhysique extends Couche {
     }
 
     @Override
-    protected void recevoirDeInf(byte[] PDU) throws ErreurDeTransmission {
-        envoieVersSup(PDU);
+    protected void recevoirDeCoucheInf(byte[] PDU) throws ErreurDeTransmission {
+        envoieVersCoucheSup(PDU);
     }
     public void createThreadReception(int port) throws IOException {
         this.thread = new ThreadReception(port, this);
@@ -83,7 +83,7 @@ public class CouchePhysique extends Couche {
                     socket.receive(packet);
 
                     //Envoie packet de donnee au parent
-                    parent.recevoirDeInf(packet.getData());
+                    parent.recevoirDeCoucheInf(packet.getData());
 
                 } catch (IOException | ErreurDeTransmission e) {
                     //throw new RuntimeException(e);
