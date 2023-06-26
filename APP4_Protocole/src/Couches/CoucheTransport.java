@@ -43,17 +43,11 @@ public class CoucheTransport extends Couche {
         return newData;
     }
 
-    public static String enleveZeros(String str)
-    {
-        String regex = "^0+(?!$)";
-        str = str.replaceAll(regex, "");
-
-        return str;
-    }
-
     private int convertASCIItoInt(byte[] data) {
         String data_string = new String(data);
-        return Integer.parseInt(enleveZeros(data_string));
+        String regex = "^0+(?!$)";
+        data_string = data_string.replaceAll(regex, "");
+        return Integer.parseInt(data_string);
     }
 
     @Override
