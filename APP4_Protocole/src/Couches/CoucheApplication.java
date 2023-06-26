@@ -10,6 +10,9 @@ import java.util.Arrays;
 
 import static java.lang.System.arraycopy;
 
+/**
+ * Implementation de couche au niveau application.
+ */
 public class CoucheApplication extends Couche {
     private static CoucheApplication instance;
     public static CoucheApplication getInstance(){
