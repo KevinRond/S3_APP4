@@ -40,7 +40,7 @@ public class CoucheApplication extends Couche {
         byte[] data_bytes = Arrays.copyOfRange(PDU, 188, PDU.length);
         try {
             String filePath = new File("").getAbsolutePath();
-            File file = new File(filePath + "/dest/" + title);
+            File file = new File(filePath + "/destination/" + title);
             if(file.exists())
                 file.delete();
             if (file.createNewFile()) {
