@@ -34,7 +34,7 @@ public class InstanceClient {
         couchePhysique.createThreadReception(Integer.parseInt(port));
         couchePhysique.erreurDelai = ajoutErreurs ? 10 : -1;
         couchePhysique.delai = 1;
-        couchePhysique.setPortDestination(4446);
+        couchePhysique.setPortDestination(25002);
         couchePhysique.setAdresseDestination(ipDestination);
     }
 

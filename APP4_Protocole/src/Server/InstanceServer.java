@@ -31,12 +31,12 @@ public class InstanceServer {
 
         couchePhysique.createThreadReception(Integer.parseInt(port));
         couchePhysique.setAdresseDestination("localhost");
-        couchePhysique.setPortDestination(4445);
+        couchePhysique.setPortDestination(25001);
     }
 
     public void DemarrageServer() throws IOException {
         couchePhysique.start();
-        System.out.print("Serveur initialise");
+        System.out.print("Serveur initialise: ");
         System.out.println("Q pour terminer le thread");
         System.out.println("Entrer");
         while (couchePhysique.isThreadRunning()) {

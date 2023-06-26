@@ -41,12 +41,11 @@ public class CoucheTransport extends Couche {
         arraycopy(convertedString, 0, newData, size-convertedString.length, convertedString.length);
 
         return newData;
-
     }
 
     private int convertASCIItoInt(byte[] data) {
         String data_string = new String(data);
-        String regex = "0+()!?$";
+        String regex = "^0+(?!$)";
         data_string = data_string.replaceAll(regex, "");
         return Integer.parseInt(data_string);
     }
