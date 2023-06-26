@@ -36,7 +36,7 @@ public class InstanceServer {
 
     public void DemarrageServer() throws IOException {
         couchePhysique.start();
-        System.out.print("Serveur initialise");
+        System.out.print("Serveur initialise: ");
         System.out.println("Q pour terminer le thread");
         System.out.println("Entrer");
         while (couchePhysique.isThreadRunning()) {

@@ -18,7 +18,6 @@ public class CoucheApplication extends Couche {
     public static CoucheApplication getInstance(){
         return instance == null ? instance = new CoucheApplication() : instance;
     }
-
     /**
      * Recois un PDU de la couche au dessus
      * S'il n'y a pas de couche au dessus, le programme principale appel la methode @EnvoieFichier.
