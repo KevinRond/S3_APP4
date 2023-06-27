@@ -7,6 +7,9 @@ import java.util.Date;
 import java.util.zip.CRC32;
 import static java.lang.System.arraycopy;
 
+/**
+ * Implementation de la couche liaison de donnees.
+ */
 public class CoucheLiaisonDeDonnees extends Couche {
     private int erreursCrc = 0;
     private int paquetsRecus = 0;
@@ -82,6 +85,11 @@ public class CoucheLiaisonDeDonnees extends Couche {
         envoieVersCoucheInf(trame);
     }
 
+    /**
+     * Cette methode log avec la date et l'heure le string passe en parametre.
+     *
+     * @param message
+     */
     private void logInfo(String message) {
         try (PrintWriter out = new PrintWriter(new FileWriter("liaisonDeDonnes.log", true))) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

@@ -4,17 +4,29 @@ import Couches.*;
 
 import java.io.IOException;
 
+/**
+ * Classe pour instancier un client et ses couches.
+ */
 public class InstanceClient {
     CouchePhysique couchePhysique;
     CoucheApplication coucheApplication;
     String nom_fichier;
+
+    /**
+     * constructeur de l'instance client
+     * @param nom_fichier
+     * @param ip_destination
+     * @param port
+     * @param ajout_erreurs
+     * @throws IOException
+     */
     public InstanceClient(String nom_fichier, String ip_destination, String port, boolean ajout_erreurs) throws IOException {
         this.nom_fichier = nom_fichier;
         creeInstanceClient(ip_destination, port, ajout_erreurs);
     }
 
     /**
-     * Construit le client pour commencer la communication
+     * Construit les couches et les associent ensemble.
      * @param ipDestination
      * @param port
      * @param ajoutErreurs
@@ -45,6 +57,11 @@ public class InstanceClient {
         couchePhysique.setAdresseDestination(ipDestination);
     }
 
+    /**
+     * Methode pour demarrer le client.
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void DemarrageClient() throws IOException, InterruptedException {
         System.out.println("Demarrage Client");
         couchePhysique.start();

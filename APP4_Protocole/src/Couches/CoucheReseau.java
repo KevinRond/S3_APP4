@@ -1,7 +1,7 @@
 package Couches;
 
 /**
- * Classe de la couche reseau.
+ * Implementation de la couche reseau. Cette classe n'est pas utilise.
  */
 public class CoucheReseau extends Couche {
     /**

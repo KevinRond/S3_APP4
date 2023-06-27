@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.*;
 
 /**
- * Classe pour la couche physique.
+ * Implementation de la couche physique.
  */
 public class CouchePhysique extends Couche {
     /**

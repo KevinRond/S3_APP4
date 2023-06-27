@@ -8,6 +8,9 @@ import java.util.Map;
 import static java.lang.System.arraycopy;
 import static java.util.Arrays.fill;
 
+/**
+ * Implementation de la couche de transport.
+ */
 public class CoucheTransport extends Couche {
     private static CoucheTransport instance;
 

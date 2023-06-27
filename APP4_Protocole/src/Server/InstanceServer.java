@@ -5,14 +5,23 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
+/**
+ * Classe pour instancier un serveur et ses couches.
+ */
 public class InstanceServer {
     private CouchePhysique couchePhysique;
+
+    /**
+     * constructeur de l'instanceServer
+     * @param port
+     * @throws IOException
+     */
     public InstanceServer(String port) throws IOException {
         constructionInstanceServer(port);
     }
 
     /**
-     * Construit le serveur pour qu'il soit pret a recevoir des fichiers
+     * Construit les couches et les associent ensemble.
      * @param port
      * @throws IOException
      */
@@ -39,6 +48,11 @@ public class InstanceServer {
         couchePhysique.setPortDestination(25001);
     }
 
+    /**
+     * Methode pour demarrer le serveur. Permet de fermer le serveur en entrant 'q'.
+     *
+     * @throws IOException
+     */
     public void DemarrageServer() throws IOException {
         couchePhysique.start();
         System.out.print("Serveur initialise: ");
