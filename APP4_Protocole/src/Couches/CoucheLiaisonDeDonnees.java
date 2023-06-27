@@ -1,4 +1,9 @@
 package Couches;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.zip.CRC32;
 import static java.lang.System.arraycopy;
 
@@ -47,6 +52,7 @@ public class CoucheLiaisonDeDonnees extends Couche {
 
 
         paquetsRecus++;
+        logInfo("Envoie du paquet numero: " + paquetsRecus);
         envoieVersCoucheSup(paquet);
     }
 
@@ -72,6 +78,17 @@ public class CoucheLiaisonDeDonnees extends Couche {
         arraycopy(PDU, 0, trame, 4, PDU.length);
 
         paquetsTransmis++;
+        logInfo("Reception du paquet numero: " + paquetsTransmis);
         envoieVersCoucheInf(trame);
+    }
+
+    private void logInfo(String message) {
+        try (PrintWriter out = new PrintWriter(new FileWriter("liaisonDeDonnes.log", true))) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String timestamp = dateFormat.format(new Date());
+            out.println(timestamp + " - " + message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
