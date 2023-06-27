@@ -28,10 +28,10 @@ public class CoucheApplication extends Couche {
     }
 
     /**
-     * Receive packet from the Transport Layer. Then creates a file in the
-     * `dest` directory, and dumps the content of the packet in it.
-     * @param PDU   Contains the name of the file in the first 188 bytes,
-     *              and the data from the file on the other bytes.
+     * Reçois un paquet de la couche de Transport. Cree ensuite un fichier dans le dossier
+     * 'dest' pour y mettre le contenu du paquet.
+     * @param PDU   Contient le nom du ficher dans les 188 premiers bytes et le contenu du fichier
+     *              dans le reste des bytes.
      */
     @Override
     protected void recevoirDeCoucheInf(byte[] PDU) {
@@ -60,8 +60,8 @@ public class CoucheApplication extends Couche {
     }
 
     /**
-     * Send a file to the transport layer.
-     * @param path  File to transmit.
+     * Envois un fichier à la couche de Transport.
+     * @param path  L'emplacement du fichier à envoyer.
      */
     public void EnvoieFichier(String path) throws IOException, InterruptedException {
         File fichier = new File(path);

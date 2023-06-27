@@ -32,6 +32,12 @@ public class CoucheTransport extends Couche {
         return instance == null ? instance = new CoucheTransport() : instance;
     }
 
+    /**
+     * Convertis les bytes en ASCII
+     * @param data
+     * @param size
+     * @return
+     */
     private byte[] convertIntToASCII(int data, int size) {
         String convertedInt = Integer.toString(data);
         byte[] convertedString = convertedInt.getBytes(StandardCharsets.US_ASCII);
@@ -43,6 +49,11 @@ public class CoucheTransport extends Couche {
         return newData;
     }
 
+    /**
+     * Convertis les données ASCII en integer
+     * @param data
+     * @return
+     */
     private int convertASCIItoInt(byte[] data) {
         String data_string = new String(data);
         String regex = "^0+(?!$)";
@@ -50,6 +61,10 @@ public class CoucheTransport extends Couche {
         return Integer.parseInt(data_string);
     }
 
+    /**
+     * Recois un paquet de la couche Reseau, transmet le paquet a la couche Physique
+     * @param PDU
+     */
     @Override
     protected void recevoirDeCoucheSup(byte[] PDU) {
         int count = (int) Math.ceil((double) PDU.length / SIZE);
@@ -80,7 +95,11 @@ public class CoucheTransport extends Couche {
     }
 
 
-
+    /**
+     * Recois un paquet de la couche Physique, le transmet a la couche Reseau
+     * @param PDU
+     * @throws ErreurDeTransmission
+     */
     @Override
     protected void recevoirDeCoucheInf(byte[] PDU) throws ErreurDeTransmission {
         byte[] seq_bytes = Arrays.copyOfRange(PDU, SEQ_HEADER_POS, SIZE_HEADER_POS);
@@ -132,6 +151,15 @@ public class CoucheTransport extends Couche {
         }
     }
 
+    /**
+     * Sauvegarde un paquet.
+     * S'il manque un paquet, envois une requete de retransmission.
+     * Si le paquet est recu, envois une confirmation.
+     *
+     * @param seq
+     * @param data_bytes
+     * @throws ErreurDeTransmission
+     */
     private void sauvegardePDU(int seq, byte[] data_bytes) throws ErreurDeTransmission {
         if (seq != 0 && bufferReception.get(seq - 1) == null){
             erreurs++;
@@ -147,6 +175,12 @@ public class CoucheTransport extends Couche {
         envoieVersCoucheInf(ackPDU);
     }
 
+    /**
+     * Cree un paquet ack avec un opcode ack, un numero de sequence specifique
+     * et aucune donnees
+     * @param seq   Numero de sequence specifique.
+     * @return      PDU qui contient l'approbation
+     */
     private byte[] creePDUAck(int seq) {
         byte[] ackPDU = new byte[200];
 
@@ -157,6 +191,12 @@ public class CoucheTransport extends Couche {
         return ackPDU;
     }
 
+    /**
+     * Cree un paquet a renvoyer avec un opcode et un numero
+     * de sequence specifique.
+     * @param seq   Numero specifique au paquet demande.
+     * @return      Le PDU qui contient la demande de renvois
+     */
     private byte[] creePDUReenvoie(int seq) {
         int taille = 0;
         byte [] PDU_Reenvoie = new byte[200];

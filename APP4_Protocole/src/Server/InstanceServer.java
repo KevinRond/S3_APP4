@@ -11,6 +11,11 @@ public class InstanceServer {
         constructionInstanceServer(port);
     }
 
+    /**
+     * Construit le serveur pour qu'il soit pret a recevoir des fichiers
+     * @param port
+     * @throws IOException
+     */
     private void constructionInstanceServer(String port) throws IOException {
         //Instanciation des couches
         CoucheApplication coucheApplication = CoucheApplication.getInstance();

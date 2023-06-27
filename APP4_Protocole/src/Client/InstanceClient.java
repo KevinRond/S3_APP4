@@ -13,6 +13,13 @@ public class InstanceClient {
         creeInstanceClient(ip_destination, port, ajout_erreurs);
     }
 
+    /**
+     * Construit le client pour commencer la communication
+     * @param ipDestination
+     * @param port
+     * @param ajoutErreurs
+     * @throws IOException
+     */
     private void creeInstanceClient(String ipDestination, String port, boolean ajoutErreurs) throws IOException {
         //Instanciation des couches
         CoucheTransport coucheTransport = CoucheTransport.getInstance();

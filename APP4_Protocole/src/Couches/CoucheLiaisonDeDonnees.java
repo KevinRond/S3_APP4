@@ -15,7 +15,7 @@ public class CoucheLiaisonDeDonnees extends Couche {
     }
 
     /**
-     * Reset the statistics from the singleton
+     * Initialise les données du singleton
      */
     public void Reset() {
         erreursCrc = 0;
@@ -25,10 +25,9 @@ public class CoucheLiaisonDeDonnees extends Couche {
 
 
     /**
-     * Receive data from the Physical Layer, check the CRC values, dump the
-     * packet if the CRC fails, or transmits it to the Network layer if
-     * successful.
-     * @param PDU   Packet from the Physical Layer
+     * Recois des données de la couche Physique, evalue la valeur du crc, jete le paquet si le
+     * paquet n'est pas bon, le transmet si le paquet est bon.
+     * @param PDU   Paquet de la couche physique
      */
     @Override
     protected void recevoirDeCoucheInf(byte[] PDU) throws ErreurDeTransmission {
@@ -41,29 +40,25 @@ public class CoucheLiaisonDeDonnees extends Couche {
         crc.update(paquet);
         int valeurCrc = (int) crc.getValue();
         int oldCRC = (((int) PDU[0] << 24) & 0xFF000000) | (((int) PDU[1] << 16) & 0x00FF0000) | (((int) PDU[2] << 8) & 0x0000FF00) | ((int) PDU[3] & 0x000000FF);
-        if (valeurCrc != oldCRC) {  // Error in CRC
+        if (valeurCrc != oldCRC) {
             System.out.println("Error CRC32");
             erreursCrc++;
-            return;                 // Drop packet
         }
 
 
-        // Send PDU to network layer
         paquetsRecus++;
         envoieVersCoucheSup(paquet);
     }
 
     /**
-     * Receive a packet to transmit from the Network layer, add a 32-bit CRC
-     * to the front of it and transmits it to the Physical layer.
+     * Recois un paquet a transmettre de la couche reseau, ajoute un crc 32-bit
+     * devant le paquet et le transmet a la couche physique.
      * @param PDU
      */
     @Override
     protected void recevoirDeCoucheSup(byte[] PDU) {
-        // Allocate new PDU
         byte[] trame = new byte[PDU.length + 4];
 
-        // Calculate CRC using polynomial 0x82608EDB (default)
         CRC32 crc = new CRC32();
         crc.update(PDU);
         long valeurCrc = crc.getValue();
@@ -74,10 +69,8 @@ public class CoucheLiaisonDeDonnees extends Couche {
                 (byte) valeurCrc};
         arraycopy(CRCBytes, 0, trame, 0, CRCBytes.length);
 
-        // Copy PDU into trame
         arraycopy(PDU, 0, trame, 4, PDU.length);
 
-        // Send PDU to physical layer
         paquetsTransmis++;
         envoieVersCoucheInf(trame);
     }
